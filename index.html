@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>右上角選單</title>  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- p5.js 畫布 -->
+  <div id="p5-container"></div>
+
+  <!-- 選單 -->
+  <ul id="menu">
+    <li><a href="#" onclick="hideIframe()">首頁</a></li>
+    <li>自我介紹</li>
+    <li class="dropdown">
+      作品集
+      <ul class="dropdown-menu">
+        <li><a href="#" onclick="loadIframe('https://cfchengit.github.io/20250324/')">第一周作業</a></li>
+        <li><a href="#" onclick="loadIframe('https://cfchengit.github.io/2025_mid/')">第二周作業</a></li>
+        <li><a href="#" onclick="loadIframe('https://www.et.tku.edu.tw')">教科系</a></li>
+        <li><a href="#" onclick="loadIframe('#')">第四周作業</a></li>
+      </ul>
+    </li>
+    <li>測驗卷</li>
+    <li>教學影片</li>
+  </ul>
+
+  <!-- iframe 容器 -->
+  <div class="iframe-container" id="iframe-container">
+    <iframe id="content-frame" src="" frameborder="0"></iframe>
+  </div>
+
+  <script>
+    // 動態載入 iframe 的內容
+    function loadIframe(url) {
+      const iframeContainer = document.getElementById('iframe-container');
+      const iframe = document.getElementById('content-frame');
+      iframe.src = url;
+      iframeContainer.style.display = 'flex'; // 顯示 iframe
+    }
+
+    // 隱藏 iframe
+    function hideIframe() {
+      const iframeContainer = document.getElementById('iframe-container');
+      const iframe = document.getElementById('content-frame');
+      iframe.src = ''; // 清空 iframe 的內容
+      iframeContainer.style.display = 'none'; // 隱藏 iframe
+    }
+
+    // 控制選單顯示與隱藏
+    window.addEventListener('mousemove', (event) => {
+      const menu = document.getElementById('menu');
+      if (event.clientY <= 300) {
+        menu.classList.add('visible'); // 顯示選單
+      } else {
+        menu.classList.remove('visible'); // 隱藏選單
+      }
+    });
+  </script>
+
+  <!-- 引入 p5.js 和 sketch.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.js"></script>
+  <script src="sketch.js"></script>
+</body>
+</html>
